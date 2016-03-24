@@ -1,0 +1,20 @@
+{
+    "name": "lolautruche/payline-bundle",
+    "description": "Symfony integration for Payline payment system",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérôme Vieilledent",
+            "email": "lolautruche@gmail.com"
+        }
+    ],
+    "require": {
+        "monext/payline-sdk": "^4.45",
+        "symfony/symfony": "^2.7.10|^3.0.3"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Lolautruche\\PaylineBundle\\" : ""
+        }
+    }
+}
