@@ -23,7 +23,7 @@ interface WebGatewayInterface
      * $transaction will be updated with received payment session token.
      *
      * @param WebTransaction $transaction
-     * @return mixed
+     * @return PaylineResult
      */
     public function initiateWebTransaction(WebTransaction $transaction);
 
@@ -32,7 +32,7 @@ interface WebGatewayInterface
      * Will trigger a "getWebPaymentDetails".
      *
      * @param string $paymentToken
-     * @return mixed
+     * @return PaylineResult
      */
     public function verifyWebTransaction($paymentToken);
 }
