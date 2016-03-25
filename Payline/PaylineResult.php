@@ -96,12 +96,21 @@ class PaylineResult
     /**
      * Returns a result item, identified by its $path, using property path notation.
      * Keep in mind that Payline result is stored as a hash.
+     * You may omit array brackets if the item you want to get is directly accessible (i.e. not in a sub-array).
      *
-     * Example: When using Payline::verifyWebTransaction(), which uses getWebPaymentDetails from Payline API,
-     * to get transaction.id item, you should do:
+     * Example 1:
+     * When using Payline::verifyWebTransaction(), which uses getWebPaymentDetails from Payline API, to get transaction.id item, you should do:
      *
      * ```php
      * $transactionId = $result->getItem('[transaction][id]');
+     * ```
+     *
+     * Example 2:
+     * Get "redirectUrl" from the hash after calling Payline::initiateWebTransaction():
+     *
+     * ```php
+     * $redirectUrl = $result->getItem('redirectUrl');
+     * // Will have the same result as `$result->getItem('[redirectUrl]')`
      * ```
      *
      * Will return null if the item is not available.
@@ -111,6 +120,11 @@ class PaylineResult
      */
     public function getItem($path)
     {
+        // Property path doesn't contain array brackets, assume it is a direct access to an item.
+        if (strpos($path, '[') === false && strpos($path, ']') === false) {
+            $path = sprintf('[%s]', $path);
+        }
+
         if ($this->accessor->isReadable($this->resultHash, $path)) {
             return $this->accessor->getValue($this->resultHash, $path);
         }
