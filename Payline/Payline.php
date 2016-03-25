@@ -11,7 +11,11 @@
 
 namespace Lolautruche\PaylineBundle\Payline;
 
+use Lolautruche\PaylineBundle\PaylineEvents;
+use Lolautruche\PaylineBundle\ResultEvent;
+use Lolautruche\PaylineBundle\WebTransactionEvent;
 use Payline\PaylineSDK;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Main Payline implementation, abstracting PaylineSDK.
@@ -22,6 +26,11 @@ class Payline implements WebGatewayInterface
      * @var PaylineSDK
      */
     private $paylineSDK;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
     /**
      * Default currency code.
@@ -37,9 +46,10 @@ class Payline implements WebGatewayInterface
      */
     private $defaultContractNumber;
 
-    public function __construct(PaylineSDK $paylineSDK, $defaultCurrency, $defaultContractNumber = null)
+    public function __construct(PaylineSDK $paylineSDK, EventDispatcherInterface $eventDispatcher, $defaultCurrency, $defaultContractNumber = null)
     {
         $this->paylineSDK = $paylineSDK;
+        $this->eventDispatcher = $eventDispatcher;
         $this->defaultCurrency = $defaultCurrency;
         $this->defaultContractNumber = $defaultContractNumber;
     }
@@ -57,6 +67,11 @@ class Payline implements WebGatewayInterface
      */
     public function initiateWebTransaction(WebTransaction $transaction)
     {
+        $this->eventDispatcher->dispatch(
+            PaylineEvents::BEFORE_WEB_TRANSACTION_INITIATE,
+            new WebTransactionEvent($transaction)
+        );
+
         $payment = [
             'amount' => $transaction->getAmount(),
             'currency' => $transaction->getCurrency() ?: $this->defaultCurrency,
@@ -84,6 +99,10 @@ class Payline implements WebGatewayInterface
         ], $transaction->getExtraOptions());
 
         $paylineResult = new PaylineResult($this->paylineSDK->doWebPayment($params));
+        $this->eventDispatcher->dispatch(
+            PaylineEvents::AFTER_WEB_TRANSACTION_INITIATE,
+            new ResultEvent($paylineResult)
+        );
 
         return $paylineResult;
     }

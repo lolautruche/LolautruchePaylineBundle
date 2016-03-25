@@ -8,6 +8,9 @@ parameters:
     lolautruche_payline.log_verbosity: 200 # Stands for Logger::INFO
     lolautruche_payline.default_currency: 978 # ISO code for Euro
     lolautruche_payline.default_contract_number: ~
+    lolautruche_payline.return_route: return_route
+    lolautruche_payline.cancel_route: cancel_route
+    lolautruche_payline.notification_route: notification_route
 
 services:
     # Set PaylineSDK as a service.
@@ -26,5 +29,6 @@ services:
         class: Lolautruche\PaylineBundle\Payline\Payline
         arguments:
             - @lolautruche_payline.sdk
+            - @event_dispatcher
             - %lolautruche_payline.default_currency%
             - %lolautruche_payline.default_contract_number%
