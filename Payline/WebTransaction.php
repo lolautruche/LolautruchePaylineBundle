@@ -362,6 +362,12 @@ class WebTransaction
         return $this;
     }
 
+    public function addExtraOption($key, $value)
+    {
+        $this->extraOptions[$key] = $value;
+        return $this;
+    }
+
     /**
      * @return string
      */
