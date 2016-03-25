@@ -1,3 +1,30 @@
 parameters:
+    lolautruche_payline.merchant_id: ~
+    lolautruche_payline.access_key: ~
+    lolautruche_payline.proxy.host: ~
+    lolautruche_payline.proxy.login: ~
+    lolautruche_payline.proxy.password: ~
+    lolautruche_payline.environment: HOMO
+    lolautruche_payline.log_verbosity: 200 # Stands for Logger::INFO
+    lolautruche_payline.default_currency: 978 # ISO code for Euro
+    lolautruche_payline.default_contract_number: ~
 
 services:
+    # Set PaylineSDK as a service.
+    lolautruche_payline.sdk:
+        class: Payline\PaylineSDK
+        arguments:
+            - %lolautruche_payline.merchant_id%
+            - %lolautruche_payline.access_key%
+            - %lolautruche_payline.proxy.host%
+            - %lolautruche_payline.proxy.login%
+            - %lolautruche_payline.proxy.password%
+            - %lolautruche_payline.environment%
+            - %kernel.logs_dir%
+
+    lolautruche_payline.gateway:
+        class: Lolautruche\PaylineBundle\Payline\Payline
+        arguments:
+            - @lolautruche_payline.sdk
+            - %lolautruche_payline.default_currency%
+            - %lolautruche_payline.default_contract_number%
