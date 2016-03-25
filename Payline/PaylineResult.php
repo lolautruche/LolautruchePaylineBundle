@@ -39,12 +39,18 @@ class PaylineResult
      */
     private $accessor;
 
-    public function __construct($resultCode, $resultShortMessage, $resultLongMessage, array $resultHash = [])
+    public function __construct(array $resultHash)
     {
-        $this->code = $resultCode;
-        $this->shortMessage = $resultShortMessage;
-        $this->longMessage = $resultLongMessage;
-        $this->resultHash = $resultHash;
+        $this->resultHash = $resultHash + [
+            'result' => [
+                'code' => null,
+                'shortMessage' => null,
+                'longMessage' => null
+            ]
+        ];
+        $this->code = $this->resultHash['result']['code'];
+        $this->shortMessage = $this->resultHash['result']['shortMessage'];
+        $this->longMessage = $this->resultHash['result']['longMessage'];
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 

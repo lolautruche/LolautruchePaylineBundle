@@ -83,9 +83,9 @@ class Payline implements WebGatewayInterface
             'order' => $order,
         ], $transaction->getExtraOptions());
 
-        $response = $this->paylineSDK->doWebPayment($params);
+        $paylineResult = new PaylineResult($this->paylineSDK->doWebPayment($params));
 
-        return new PaylineResult($response['result']['code'], $response['result']['shortMessage'], $response['result']['longMessage'], $response);
+        return $paylineResult;
     }
 
     /**
@@ -95,6 +95,6 @@ class Payline implements WebGatewayInterface
     {
         $response = $this->paylineSDK->getWebPaymentDetails(['token' => $paymentToken]);
 
-        return new PaylineResult($response['result']['code'], $response['result']['shortMessage'], $response['result']['longMessage'], $response);
+        return new PaylineResult($response);
     }
 }
