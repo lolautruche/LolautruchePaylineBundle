@@ -84,7 +84,7 @@ class Payline implements WebGatewayInterface
             'ref' => $transaction->getOrderRef(),
             'amount' => $transaction->getOrderAmount() ?: $transaction->getAmount(),
             'currency' => $transaction->getOrderCurrency() ?: $transaction->getCurrency(),
-            'date' => $transaction->getOrderDate(),
+            'date' => $transaction->getOrderDate()->format('d/m/Y H:i'),
         ];
         if ($orderTaxes = $transaction->getOrderTaxes()) {
             $order['taxes'] = $orderTaxes;
