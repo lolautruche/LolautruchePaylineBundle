@@ -1,6 +1,6 @@
 parameters:
-    lolautruche_payline.merchant_id: ~
-    lolautruche_payline.access_key: ~
+    lolautruche_payline.merchant_id: ~ # MUST be a string
+    lolautruche_payline.access_key: ~ # MUST be a string
     lolautruche_payline.proxy.host: ~
     lolautruche_payline.proxy.port: ~
     lolautruche_payline.proxy.login: ~
@@ -8,7 +8,7 @@ parameters:
     lolautruche_payline.environment: HOMO
     lolautruche_payline.log_verbosity: 200 # Stands for Logger::INFO
     lolautruche_payline.default_currency: 978 # ISO code for Euro
-    lolautruche_payline.default_contract_number: ~
+    lolautruche_payline.default_contract_number: ~ # MUST be a string
     lolautruche_payline.return_route: return_route
     lolautruche_payline.cancel_route: cancel_route
     lolautruche_payline.notification_route: notification_route
