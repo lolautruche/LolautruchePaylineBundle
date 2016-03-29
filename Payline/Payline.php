@@ -11,9 +11,9 @@
 
 namespace Lolautruche\PaylineBundle\Payline;
 
-use Lolautruche\PaylineBundle\PaylineEvents;
-use Lolautruche\PaylineBundle\ResultEvent;
-use Lolautruche\PaylineBundle\WebTransactionEvent;
+use Lolautruche\PaylineBundle\Event\PaylineEvents;
+use Lolautruche\PaylineBundle\Event\ResultEvent;
+use Lolautruche\PaylineBundle\Event\WebTransactionEvent;
 use Payline\PaylineSDK;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

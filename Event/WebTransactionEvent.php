@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Lolautruche\PaylineBundle;
+namespace Lolautruche\PaylineBundle\Event;
 
 use Lolautruche\PaylineBundle\Payline\WebTransaction;
 use Symfony\Component\EventDispatcher\Event;
