@@ -1,3 +1,7 @@
-lolautruche_payline_gateway_homepage:
-    path:     /
-    defaults: { _controller: LolautruchePaylineGatewayBundle:Default:index }
+lolautruche_payline_notification:
+    path:     /payline/notification
+    defaults: { _controller: LolautruchePaylineBundle:Payline:paymentNotification }
+
+lolautruche_payline_back_to_shop:
+    path:     /payline/back-to-shop
+    defaults: { _controller: LolautruchePaylineBundle:Payline:backToShop }
