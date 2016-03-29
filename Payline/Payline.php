@@ -51,7 +51,7 @@ class Payline implements WebGatewayInterface
         $this->paylineSDK = $paylineSDK;
         $this->eventDispatcher = $eventDispatcher;
         $this->defaultCurrency = $defaultCurrency;
-        $this->defaultContractNumber = $defaultContractNumber;
+        $this->defaultContractNumber = (string)$defaultContractNumber;
     }
 
     /**
@@ -77,7 +77,7 @@ class Payline implements WebGatewayInterface
             'currency' => $transaction->getCurrency() ?: $this->defaultCurrency,
             'action' => $transaction->getAction(),
             'mode' => $transaction->getMode(),
-            'contractNumber' => $transaction->getContractNumber(),
+            'contractNumber' => (string)$transaction->getContractNumber() ?: $this->defaultContractNumber,
         ];
 
         $order = [
