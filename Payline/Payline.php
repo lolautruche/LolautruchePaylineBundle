@@ -114,6 +114,12 @@ class Payline implements WebGatewayInterface
     {
         $response = $this->paylineSDK->getWebPaymentDetails(['token' => $paymentToken]);
 
-        return new PaylineResult($response);
+        $paylineResult = new PaylineResult($response);
+        $this->eventDispatcher->dispatch(
+            PaylineEvents::WEB_TRANSACTION_VERIFY,
+            new ResultEvent($paylineResult)
+        );
+
+        return $paylineResult;
     }
 }

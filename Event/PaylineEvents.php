@@ -16,6 +16,5 @@ final class PaylineEvents
     const PRE_WEB_TRANSACTION_INITIATE = 'payline.before_web_transaction_initiate';
     const POST_WEB_TRANSACTION_INITIATE = 'payline.after_web_transaction_initiate';
 
-    const BEFORE_WEB_TRANSACTION_VERIFY = 'payline.before_web_transaction_verify';
-    const AFTER_WEB_TRANSACTION_VERIFY = 'payline.after_web_transaction_verify';
+    const WEB_TRANSACTION_VERIFY = 'payline.web_transaction_verify';
 }
