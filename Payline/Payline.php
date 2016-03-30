@@ -40,17 +40,43 @@ class Payline implements WebGatewayInterface
     private $defaultCurrency;
 
     /**
+     * @var string
+     */
+    private $defaultReturnUrl;
+
+    /**
+     * @var string
+     */
+    private $defaultCancelUrl;
+
+    /**
+     * @var string
+     */
+    private $defaultNotificationUrl;
+
+    /**
      * Default contract number, reprenting payment mediums available.
      *
      * @var string
      */
     private $defaultContractNumber;
 
-    public function __construct(PaylineSDK $paylineSDK, EventDispatcherInterface $eventDispatcher, $defaultCurrency, $defaultContractNumber = null)
+    public function __construct(
+        PaylineSDK $paylineSDK,
+        EventDispatcherInterface $eventDispatcher,
+        $defaultCurrency,
+        $defaultReturnUrl,
+        $defaultCancelUrl,
+        $defaultNotificationUrl,
+        $defaultContractNumber = null
+    )
     {
         $this->paylineSDK = $paylineSDK;
         $this->eventDispatcher = $eventDispatcher;
         $this->defaultCurrency = $defaultCurrency;
+        $this->defaultReturnUrl = $defaultReturnUrl;
+        $this->defaultCancelUrl = $defaultCancelUrl;
+        $this->defaultNotificationUrl = $defaultNotificationUrl;
         $this->defaultContractNumber = (string)$defaultContractNumber;
     }
 
@@ -93,9 +119,13 @@ class Payline implements WebGatewayInterface
             $order['country'] = $orderCountry;
         }
 
+        // Merge options with extra options provided in the transaction.
         $params = array_merge_recursive([
             'payment' => $payment,
             'order' => $order,
+            'returnURL' => $this->defaultReturnUrl,
+            'cancelURL' => $this->defaultCancelUrl,
+            'notificationURL' => $this->defaultNotificationUrl,
         ], $transaction->getExtraOptions());
 
         $paylineResult = new PaylineResult($this->paylineSDK->doWebPayment($params));

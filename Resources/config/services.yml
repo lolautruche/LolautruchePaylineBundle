@@ -32,7 +32,10 @@ services:
     lolautruche_payline.gateway:
         class: Lolautruche\PaylineBundle\Payline\Payline
         arguments:
-            - @lolautruche_payline.sdk
-            - @event_dispatcher
+            - "@lolautruche_payline.sdk"
+            - "@event_dispatcher"
             - %lolautruche_payline.default_currency%
+            - "@=service('router').generate(parameter('lolautruche_payline.return_route'), [], 0)"
+            - "@=service('router').generate(parameter('lolautruche_payline.cancel_route'), [], 0)"
+            - "@=service('router').generate(parameter('lolautruche_payline.notification_route'), [], 0)"
             - %lolautruche_payline.default_contract_number%
