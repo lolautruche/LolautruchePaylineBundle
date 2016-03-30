@@ -11,19 +11,49 @@
 
 namespace Lolautruche\PaylineBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Lolautruche\PaylineBundle\Event\PaylineEvents;
+use Lolautruche\PaylineBundle\Event\PaymentConfirmationEvent;
+use Lolautruche\PaylineBundle\Payline\WebGatewayInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaylineController extends Controller
+class PaylineController
 {
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var WebGatewayInterface
+     */
+    private $payline;
+
+    /**
+     * Default confirmation URL the user will be redirect to after the payment.
+     * It is an absolute URL.
+     *
+     * @var string
+     */
+    private $defaultConfirmationUrl;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, WebGatewayInterface $payline, $defaultConfirmationUrl)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        $this->payline = $payline;
+        $this->defaultConfirmationUrl = $defaultConfirmationUrl;
+    }
+
     public function paymentNotificationAction(Request $request)
     {
-        $payline = $this->get('lolautruche_payline.gateway');
-        $result = $payline->verifyWebTransaction($request->get('token'));
+        $result = $this->payline->verifyWebTransaction($request->get('token'));
+        $event = new PaymentConfirmationEvent($result);
+        $this->eventDispatcher->dispatch(PaylineEvents::ON_NOTIFICATION, $event);
 
-        if (!$result->isSuccessful()) {
-            return new Response('KO');
+        if ($event->hasResponse()) {
+            return $event->getResponse();
         }
 
         return new Response('OK');
@@ -31,7 +61,14 @@ class PaylineController extends Controller
 
     public function backToShopAction(Request $request)
     {
-        dump($request);
-        return new Response('OK');
+        $result = $this->payline->verifyWebTransaction($request->get('token'));
+        $event = new PaymentConfirmationEvent($result);
+        $this->eventDispatcher->dispatch(PaylineEvents::ON_BACK_TO_SHOP, $event);
+
+        if ($event->hasResponse()) {
+            return $event->getResponse();
+        }
+
+        return new RedirectResponse($this->defaultConfirmationUrl);
     }
 }

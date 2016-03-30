@@ -28,6 +28,16 @@ final class PaylineEvents
     const POST_WEB_TRANSACTION_INITIATE = 'payline.after_web_transaction_initiate';
 
     /**
+     * Triggered when getting back from Payline website, after the customer has done his payment.
+     */
+    const ON_BACK_TO_SHOP = 'payline.on_back_to_shop';
+
+    /**
+     * Triggered when getting a payment notification from Payline.
+     */
+    const ON_NOTIFICATION = 'payline.on_notification';
+
+    /**
      * Triggered just after getWebPaymentDetails webservice was called by the Payline gateway.
      * Listeners will receive a \Lolautruche\PaylineBundle\Event\ResultEvent object.
      */

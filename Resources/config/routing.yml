@@ -1,7 +1,7 @@
 lolautruche_payline_notification:
     path:     /payline/notification
-    defaults: { _controller: LolautruchePaylineBundle:Payline:paymentNotification }
+    defaults: { _controller: lolautruche_payline.controller:paymentNotificationAction }
 
 lolautruche_payline_back_to_shop:
     path:     /payline/back-to-shop
-    defaults: { _controller: LolautruchePaylineBundle:Payline:backToShop }
+    defaults: { _controller: lolautruche_payline.controller:backToShopAction }
