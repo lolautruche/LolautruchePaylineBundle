@@ -128,6 +128,11 @@ class Payline implements WebGatewayInterface
             'notificationURL' => $this->defaultNotificationUrl,
         ], $transaction->getExtraOptions());
 
+        // Add private data.
+        foreach ($transaction->getPrivateData() as $key => $value) {
+            $this->paylineSDK->addPrivateData(['key' => $key, 'value' => $value]);
+        }
+
         $paylineResult = new PaylineResult($this->paylineSDK->doWebPayment($params));
         $this->eventDispatcher->dispatch(
             PaylineEvents::POST_WEB_TRANSACTION_INITIATE,

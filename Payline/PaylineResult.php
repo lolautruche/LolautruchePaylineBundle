@@ -35,6 +35,15 @@ class PaylineResult
     private $resultHash;
 
     /**
+     * Hash of data specific to the shop, that was passed to the transaction.
+     *
+     * @see WebTransaction::$privateData
+     *
+     * @var array
+     */
+    private $privateData = [];
+
+    /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     private $accessor;
@@ -51,6 +60,11 @@ class PaylineResult
         $this->code = $this->resultHash['result']['code'];
         $this->shortMessage = $this->resultHash['result']['shortMessage'];
         $this->longMessage = $this->resultHash['result']['longMessage'];
+        if (!empty($this->resultHash['privateDataList']['privateData'])) {
+            foreach ($this->resultHash['privateDataList']['privateData'] as $data) {
+                $this->privateData[$data['key']] = $data['value'];
+            }
+        }
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -130,5 +144,26 @@ class PaylineResult
         }
 
         return null;
+    }
+
+    /**
+     * Returns a private data, identified by $key.
+     * If no private data can be found for $key, will return $default.
+     *
+     * @param string $key
+     * @param mixed $default The default value
+     * @return mixed
+     */
+    public function getPrivateData($key, $default = null)
+    {
+        return isset($this->privateData[$key]) ? $this->privateData[$key] : $default;
+    }
+
+    /**
+     * @return array
+     */
+    public function allPrivateData()
+    {
+        return $this->privateData;
     }
 }

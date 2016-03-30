@@ -139,6 +139,22 @@ class WebTransaction
      */
     private $token;
 
+    /**
+     * Hash of data specific to the shop.
+     * It will be returned as is at the end of the payment process.
+     * Useful to e.g. store an order type, an external ID, or anything related to the order in your application.
+     *
+     * Example:
+     *
+     * ```
+     * $transaction->addPrivateData('order.type', 'service');
+     * $transaction->addPrivateData('internal_id', '1234xyz');
+     * ```
+     *
+     * @var array
+     */
+    private $privateData = [];
+
     public function __construct($amount, $orderRef, DateTime $orderDate)
     {
         $this->amount = $amount;
@@ -382,5 +398,36 @@ class WebTransaction
     public function setToken(string $token)
     {
         $this->token = $token;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPrivateData()
+    {
+        return $this->privateData;
+    }
+
+    /**
+     * @param array $privateData
+     * @return $this
+     */
+    public function setPrivateData(array $privateData)
+    {
+        $this->privateData = $privateData;
+        return $this;
+    }
+
+    /**
+     * Adds a private data.
+     *
+     * @param string $key
+     * @param string $value
+     * @return $this
+     */
+    public function addPrivateData($key, $value)
+    {
+        $this->privateData[$key] = $value;
+        return $this;
     }
 }
