@@ -15,7 +15,7 @@ use Lolautruche\PaylineBundle\Payline\PaylineResult;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaymentConfirmationEvent extends Event
+class PaymentNotificationEvent extends Event
 {
     /**
      * @var PaylineResult
@@ -38,6 +38,39 @@ class PaymentConfirmationEvent extends Event
     public function getPaylineResult()
     {
         return $this->paylineResult;
+    }
+
+    /**
+     * Indicates if payment was successful or not.
+     * Proxy to PaylineResult::isSuccessful().
+     *
+     * @return bool
+     */
+    public function isPaymentSuccessful()
+    {
+        return $this->paylineResult->isSuccessful();
+    }
+
+    /**
+     * Indicates if payment was canceled by user.
+     * Proxy to PaylineResult::isCanceled().
+     *
+     * @return bool
+     */
+    public function isPaymentCanceledByUser()
+    {
+        return $this->paylineResult->isCanceled();
+    }
+
+    /**
+     * Indicates if transaction is a duplicate of an existing one.
+     * Proxy to PaylineResult::isDuplicate().
+     *
+     * @return bool
+     */
+    public function isPaymentDuplicate()
+    {
+        return $this->paylineResult->isDuplicate();
     }
 
     /**

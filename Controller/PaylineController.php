@@ -12,7 +12,7 @@
 namespace Lolautruche\PaylineBundle\Controller;
 
 use Lolautruche\PaylineBundle\Event\PaylineEvents;
-use Lolautruche\PaylineBundle\Event\PaymentConfirmationEvent;
+use Lolautruche\PaylineBundle\Event\PaymentNotificationEvent;
 use Lolautruche\PaylineBundle\Payline\WebGatewayInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,7 +49,7 @@ class PaylineController
     public function paymentNotificationAction(Request $request)
     {
         $result = $this->payline->verifyWebTransaction($request->get('token'));
-        $event = new PaymentConfirmationEvent($result);
+        $event = new PaymentNotificationEvent($result);
         $this->eventDispatcher->dispatch(PaylineEvents::ON_NOTIFICATION, $event);
 
         if ($event->hasResponse()) {
@@ -62,7 +62,7 @@ class PaylineController
     public function backToShopAction(Request $request)
     {
         $result = $this->payline->verifyWebTransaction($request->get('token'));
-        $event = new PaymentConfirmationEvent($result);
+        $event = new PaymentNotificationEvent($result);
         $this->eventDispatcher->dispatch(PaylineEvents::ON_BACK_TO_SHOP, $event);
 
         if ($event->hasResponse()) {
