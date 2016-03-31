@@ -29,11 +29,13 @@ final class PaylineEvents
 
     /**
      * Triggered when getting back from Payline website, after the customer has done his payment.
+     * Listeners will receive a \Lolautruche\PaylineBundle\Event\PaymentNotificationEvent object.
      */
     const ON_BACK_TO_SHOP = 'payline.on_back_to_shop';
 
     /**
      * Triggered when getting a payment notification from Payline.
+     * Listeners will receive a \Lolautruche\PaylineBundle\Event\PaymentNotificationEvent object.
      */
     const ON_NOTIFICATION = 'payline.on_notification';
 
