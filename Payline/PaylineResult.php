@@ -20,6 +20,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 class PaylineResult
 {
     const CODE_TRANSACTION_APPROVED = '00000';
+    const CODE_TRANSACTION_CANCELED = '02319';
+    const CODE_TRANSACTION_DUPLICATE = '02324';
     const CODE_TRANSACTION_INVALID_PREFIX = '023';
     const CODE_WALLET_ALREADY_EXISTS = '02502';
     const CODE_WALLET_NOT_SUPPORTED = '02511';
@@ -68,9 +70,28 @@ class PaylineResult
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
+    /**
+     * @return bool
+     */
     public function isSuccessful()
     {
-        return $this->code == static::CODE_TRANSACTION_APPROVED;
+        return $this->code === static::CODE_TRANSACTION_APPROVED;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanceled()
+    {
+        return $this->code === static::CODE_TRANSACTION_CANCELED;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDuplicate()
+    {
+        return $this->code === static::CODE_TRANSACTION_DUPLICATE;
     }
 
     /**
