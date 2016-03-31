@@ -61,10 +61,6 @@ class PaylineController
         $event = new PaymentNotificationEvent($result);
         $this->eventDispatcher->dispatch(PaylineEvents::ON_NOTIFICATION, $event);
 
-        if ($event->hasResponse()) {
-            return $event->getResponse();
-        }
-
         return new Response('OK');
     }
 
