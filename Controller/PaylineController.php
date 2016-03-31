@@ -32,18 +32,27 @@ class PaylineController
     private $payline;
 
     /**
-     * Default confirmation URL the user will be redirect to after the payment.
+     * Default confirmation URL the user will be redirected to after the payment.
      * It is an absolute URL.
      *
      * @var string
      */
     private $defaultConfirmationUrl;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, WebGatewayInterface $payline, $defaultConfirmationUrl)
+    /**
+     * Default URL where the user will be redirected to if the payment was unsuccessful.
+     * It is an absolute URL.
+     *
+     * @var string
+     */
+    private $defaultErrorUrl;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, WebGatewayInterface $payline, $defaultConfirmationUrl, $defaultErrorUrl)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->payline = $payline;
         $this->defaultConfirmationUrl = $defaultConfirmationUrl;
+        $this->defaultErrorUrl = $defaultErrorUrl;
     }
 
     public function paymentNotificationAction(Request $request)
@@ -69,6 +78,6 @@ class PaylineController
             return $event->getResponse();
         }
 
-        return new RedirectResponse($this->defaultConfirmationUrl);
+        return new RedirectResponse($result->isSuccessful() ? $this->defaultConfirmationUrl : $this->defaultErrorUrl);
     }
 }

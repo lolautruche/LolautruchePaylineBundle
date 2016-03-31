@@ -10,6 +10,7 @@ parameters:
     lolautruche_payline.default_currency: 978 # ISO code for Euro
     lolautruche_payline.default_contract_number: ~ # MUST be a string
     lolautruche_payline.default_confirmation_route: ~ # MUST be provided via semantic config
+    lolautruche_payline.default_error_route: ~ # MUST be provided via semantic config
     lolautruche_payline.return_route: lolautruche_payline_back_to_shop
     lolautruche_payline.cancel_route: lolautruche_payline_back_to_shop
     lolautruche_payline.notification_route: lolautruche_payline_notification
@@ -47,3 +48,4 @@ services:
             - "@event_dispatcher"
             - "@lolautruche_payline.gateway"
             - "@=service('router').generate(parameter('lolautruche_payline.default_confirmation_route'), [], 0)"
+            - "@=service('router').generate(parameter('lolautruche_payline.default_error_route'), [], 0)"
