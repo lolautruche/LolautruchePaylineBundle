@@ -12,6 +12,7 @@
 namespace Lolautruche\PaylineBundle\Payline;
 
 use DateTime;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Transaction class for web payments (i.e. doWebPayment requests).
@@ -140,6 +141,11 @@ class WebTransaction
     private $token;
 
     /**
+     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    private $accessor;
+
+    /**
      * Hash of data specific to the shop.
      * It will be returned as is at the end of the payment process.
      * Useful to e.g. store an order type, an external ID, or anything related to the order in your application.
@@ -160,6 +166,7 @@ class WebTransaction
         $this->amount = $amount;
         $this->orderRef = $orderRef;
         $this->orderDate = $orderDate;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -378,9 +385,43 @@ class WebTransaction
         return $this;
     }
 
-    public function addExtraOption($key, $value)
+    /**
+     * Adds an extra option to the web transaction.
+     * It will be added to the Payline SOAP parameters list.
+     * All parameters are stored internally as a hash to be passed to Payline SOAP webservice.
+     * The option is identified by $path, using property path notation (see PropertyAccess component).
+     * You may omit array brackets in $path if you want to assign a value to a 1st level option.
+     *
+     * Example : "payment.differedActionDate" parameter is represented as
+     *
+     * ```
+     * $transaction = new WebTransaction(1000, 'order_ref', new \DateTime);
+     * $transaction->addExtraOption('[buyer][email]', 'customer@domain.com');
+     * print_r($transaction->getExtraOptions());
+     * ```
+     *
+     * Will output:
+     *
+     * ```
+     * [
+     *     "buyer" => [
+     *         "email" => "customer@domain.com"
+     *     ]
+     * ]
+     * ```
+     *
+     * See Payline documentation what you can set.
+     *
+     * @return WebTransaction
+     */
+    public function addExtraOption($path, $value)
     {
-        $this->extraOptions[$key] = $value;
+        // Property path doesn't contain array brackets, assume it is an assignment to a 1st level option.
+        if (strpos($path, '[') === false && strpos($path, ']') === false) {
+            $path = sprintf('[%s]', $path);
+        }
+
+        $this->accessor->setValue($this->extraOptions, $path, $value);
         return $this;
     }
 
