@@ -56,7 +56,7 @@ class WebTransaction
 
     /**
      * Payment mode.
-     * One of the PAYEMNT_MODE_* constants.
+     * One of the PAYMENT_MODE_* constants.
      *
      * @var string
      */
