@@ -16,22 +16,34 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration.
- *
- * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
- */
 class LolautruchePaylineExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        // PaylineSDK config
+        $container->setParameter('lolautruche_payline.merchant_id', $config['merchant_id']);
+        $container->setParameter('lolautruche_payline.access_key', $config['access_key']);
+        $container->setParameter('lolautruche_payline.default_contract_number', $config['contract_number']);
+        $container->setParameter(
+            'lolautruche_payline.default_currency',
+            constant('Lolautruche\PaylineBundle\Payline\WebTransaction::CURRENCY_' . $config['default_currency'])
+        );
+        $container->setParameter('lolautruche_payline.environment', $config['environment']);
+        $container->setParameter('lolautruche_payline.log_verbosity', constant('Monolog\Logger::' . strtoupper($config['log_level'])));
+
+        // Proxy config for PaylineSDK
+        foreach ($config['proxy'] as $key => $value) {
+            $container->setParameter("lolautruche_payline.proxy.$key", $value);
+        }
+
+        // Default routes
+        $container->setParameter('lolautruche_payline.default_confirmation_route', $config['default_confirmation_route']);
+        $container->setParameter('lolautruche_payline.default_error_route', $config['default_error_route']);
     }
 }
