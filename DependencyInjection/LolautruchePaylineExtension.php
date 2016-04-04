@@ -32,10 +32,10 @@ class LolautruchePaylineExtension extends Extension
         $container->setParameter('lolautruche_payline.default_contract_number', $config['contract_number']);
         $container->setParameter(
             'lolautruche_payline.default_currency',
-            constant('Lolautruche\PaylineBundle\Payline\WebTransaction::CURRENCY_' . $config['default_currency'])
+            constant('Lolautruche\PaylineBundle\Payline\WebTransaction::CURRENCY_'.$config['default_currency'])
         );
         $container->setParameter('lolautruche_payline.environment', $config['environment']);
-        $container->setParameter('lolautruche_payline.log_verbosity', constant('Monolog\Logger::' . strtoupper($config['log_level'])));
+        $container->setParameter('lolautruche_payline.log_verbosity', constant('Monolog\Logger::'.strtoupper($config['log_level'])));
 
         // Proxy config for PaylineSDK
         foreach ($config['proxy'] as $key => $value) {

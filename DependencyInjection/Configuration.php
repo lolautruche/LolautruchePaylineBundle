@@ -11,8 +11,6 @@
 
 namespace Lolautruche\PaylineBundle\DependencyInjection;
 
-use Lolautruche\PaylineBundle\Payline\WebTransaction;
-use Monolog\Logger;
 use Payline\PaylineSDK;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

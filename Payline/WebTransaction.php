@@ -34,7 +34,7 @@ class WebTransaction
     const PAYMENT_MODE_MULTIPLE = 'NX';
 
     /**
-     * Payment amount, in the smallest currency unit (e.g. 145 for 1.45€)
+     * Payment amount, in the smallest currency unit (e.g. 145 for 1.45€).
      *
      * @var int
      */
@@ -179,11 +179,13 @@ class WebTransaction
 
     /**
      * @param int $amount
+     *
      * @return WebTransaction
      */
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -197,11 +199,13 @@ class WebTransaction
 
     /**
      * @param int $currency
+     *
      * @return WebTransaction
      */
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
         return $this;
     }
 
@@ -215,11 +219,13 @@ class WebTransaction
 
     /**
      * @param int $action
+     *
      * @return WebTransaction
      */
     public function setAction($action)
     {
         $this->action = $action;
+
         return $this;
     }
 
@@ -233,11 +239,13 @@ class WebTransaction
 
     /**
      * @param string $mode
+     *
      * @return WebTransaction
      */
     public function setMode($mode)
     {
         $this->mode = $mode;
+
         return $this;
     }
 
@@ -251,11 +259,13 @@ class WebTransaction
 
     /**
      * @param string $contractNumber
+     *
      * @return WebTransaction
      */
     public function setContractNumber($contractNumber)
     {
         $this->contractNumber = $contractNumber;
+
         return $this;
     }
 
@@ -269,11 +279,13 @@ class WebTransaction
 
     /**
      * @param mixed $orderRef
+     *
      * @return WebTransaction
      */
     public function setOrderRef($orderRef)
     {
         $this->orderRef = $orderRef;
+
         return $this;
     }
 
@@ -287,11 +299,13 @@ class WebTransaction
 
     /**
      * @param int $orderAmount
+     *
      * @return WebTransaction
      */
     public function setOrderAmount($orderAmount)
     {
         $this->orderAmount = $orderAmount;
+
         return $this;
     }
 
@@ -305,11 +319,13 @@ class WebTransaction
 
     /**
      * @param int $orderCurrency
+     *
      * @return WebTransaction
      */
     public function setOrderCurrency($orderCurrency)
     {
         $this->orderCurrency = $orderCurrency;
+
         return $this;
     }
 
@@ -323,11 +339,13 @@ class WebTransaction
 
     /**
      * @param int $orderTaxes
+     *
      * @return WebTransaction
      */
     public function setOrderTaxes($orderTaxes)
     {
         $this->orderTaxes = $orderTaxes;
+
         return $this;
     }
 
@@ -341,11 +359,13 @@ class WebTransaction
 
     /**
      * @param string $orderCountry
+     *
      * @return WebTransaction
      */
     public function setOrderCountry($orderCountry)
     {
         $this->orderCountry = $orderCountry;
+
         return $this;
     }
 
@@ -359,11 +379,13 @@ class WebTransaction
 
     /**
      * @param DateTime $orderDate
+     *
      * @return WebTransaction
      */
     public function setOrderDate(DateTime $orderDate)
     {
         $this->orderDate = $orderDate;
+
         return $this;
     }
 
@@ -377,11 +399,13 @@ class WebTransaction
 
     /**
      * @param array $extraOptions
+     *
      * @return WebTransaction
      */
     public function setExtraOptions(array $extraOptions)
     {
         $this->extraOptions = $extraOptions;
+
         return $this;
     }
 
@@ -422,6 +446,7 @@ class WebTransaction
         }
 
         $this->accessor->setValue($this->extraOptions, $path, $value);
+
         return $this;
     }
 
@@ -451,11 +476,13 @@ class WebTransaction
 
     /**
      * @param array $privateData
+     *
      * @return $this
      */
     public function setPrivateData(array $privateData)
     {
         $this->privateData = $privateData;
+
         return $this;
     }
 
@@ -464,11 +491,13 @@ class WebTransaction
      *
      * @param string $key
      * @param string $value
+     *
      * @return $this
      */
     public function addPrivateData($key, $value)
     {
         $this->privateData[$key] = $value;
+
         return $this;
     }
 }

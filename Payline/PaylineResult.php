@@ -56,8 +56,8 @@ class PaylineResult
             'result' => [
                 'code' => null,
                 'shortMessage' => null,
-                'longMessage' => null
-            ]
+                'longMessage' => null,
+            ],
         ];
         $this->code = $this->resultHash['result']['code'];
         $this->shortMessage = $this->resultHash['result']['shortMessage'];
@@ -151,6 +151,7 @@ class PaylineResult
      * Will return null if the item is not available.
      *
      * @param string $path Path to the detail in property path notation.
+     *
      * @return mixed|null
      */
     public function getItem($path)
@@ -164,7 +165,7 @@ class PaylineResult
             return $this->accessor->getValue($this->resultHash, $path);
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -172,7 +173,8 @@ class PaylineResult
      * If no private data can be found for $key, will return $default.
      *
      * @param string $key
-     * @param mixed $default The default value
+     * @param mixed  $default The default value
+     *
      * @return mixed
      */
     public function getPrivateData($key, $default = null)
