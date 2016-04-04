@@ -28,12 +28,30 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('access_key')->isRequired()->end()
                 ->scalarNode('contract_number')
                     ->isRequired()
-                    ->info('Default contract number to use. MUST be a string.')
+                    ->info('Default contract number to use. Use quotes as it MUST be a string.')
                 ->end()
                 ->enumNode('default_currency')
-                    ->info("Currency to use by default for transactions.\nYou may also pass a string, accepted values are 'EUR', 'DOLLAR', 'CHF', 'POUND', 'CAD'")
+                    ->info("Currency to use by default for transactions.\nYou may also pass a currency symbol. Accepted values are '€', '$', '£'")
                     ->values(['EUR', 'DOLLAR', 'CHF', 'POUND', 'CAD'])
                     ->isRequired()
+                    ->beforeNormalization()
+                        ->ifInArray(['€', '$', '£'])
+                        ->then(function ($v) {
+                            switch ($v) {
+                                case '€':
+                                    $v = 'EUR';
+                                    break;
+                                case '$':
+                                    $v = 'DOLLAR';
+                                    break;
+                                case '£':
+                                    $v = 'POUND';
+                                    break;
+                            }
+
+                            return $v;
+                        })
+                    ->end()
                 ->end()
                 ->scalarNode('default_confirmation_route')
                     ->isRequired()
@@ -65,7 +83,7 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('warning')
                 ->end()
                 ->arrayNode('proxy')
-                    ->info('Proxy to use to reach Payline webservices')
+                    ->info('Proxy to use in order to reach Payline webservices')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('host')->defaultNull()->end()
