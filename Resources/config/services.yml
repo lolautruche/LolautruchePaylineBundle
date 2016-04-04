@@ -42,6 +42,9 @@ services:
             - "@=service('router').generate(parameter('lolautruche_payline.notification_route'), [], 0)"
             - %lolautruche_payline.default_contract_number%
 
+    payline:
+        alias: lolautruche_payline.gateway
+
     lolautruche_payline.controller:
         class: Lolautruche\PaylineBundle\Controller\PaylineController
         arguments:
