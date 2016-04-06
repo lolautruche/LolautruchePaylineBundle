@@ -65,7 +65,7 @@ class WebTransaction
 
     /**
      * VAD contract number to use, if different than the default one.
-     * This contract represents payment mediums one may use (e.g. VISA, Mastercard...).
+     * This contract represents means of payment one may use (e.g. VISA, Mastercard...).
      *
      * @var string
      */
