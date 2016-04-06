@@ -53,7 +53,7 @@ class PaymentController extends Controller
 }
 ```
 
-You may also [customize the transaction](04-advanced_customize_transaction), e.g. to add private data, change the currency,
+You may also [customize the transaction](03-customize_transaction.md), e.g. to add private data, change the currency,
 add customer information...
 
 
@@ -81,7 +81,7 @@ path using PropertyAccess notation.
 > You can find all available items in
 > [Payline `getWebPaymentDetails` service documentation](https://support.payline.com/hc/en-us/articles/201080786-Description-of-web-service-APIs-used-by-the-Payline-payment-solution).
 
-[Private data that you may have set](04-advanced_customize_transaction#private-data) are also accessible using
+[Private data that you may have set](03-customize_transaction.md#private-data) are also accessible using
 `\Lolautruche\PaylineBundle\Payline\PaylineResult::getPrivateData()`.
 
 

@@ -61,7 +61,7 @@ during the transaction process.
 This is possible using **private data**, which consist in a list of simple key/value pairs.
 These private data will be returned by Payline and will be accessible in `PaylineResult` object returned by the gateway.
 
-> [Learn how to retrieve and use `PaylineResult` to control the payment, after getting back to your shop](05-advanced_control_payment_verification.md).
+> [Learn how to retrieve and use `PaylineResult` to control the payment, after getting back to your shop](05-events.md).
 
 ```php
 use Lolautruche\PaylineBundle\Payline\WebTransaction
