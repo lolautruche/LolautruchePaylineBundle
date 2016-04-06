@@ -165,7 +165,7 @@ class PaylineResult
             return $this->accessor->getValue($this->resultHash, $path);
         }
 
-        return;
+        return null;
     }
 
     /**
