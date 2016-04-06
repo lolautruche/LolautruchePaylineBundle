@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('access_key')->isRequired()->end()
                 ->scalarNode('contract_number')
                     ->isRequired()
-                    ->info('Default contract number to use. Use quotes as it MUST be a string.')
+                    ->info('Default VAD contract number to use. Use quotes as it MUST be a string.')
                 ->end()
                 ->enumNode('default_currency')
                     ->info("Currency to use by default for transactions.\nYou may also pass a currency symbol. Accepted values are '€', '$', '£'")
