@@ -24,7 +24,11 @@ Mandatory elements from you Payline account are:
 * **Contract number**, related to the means of payment you configured in Payline admin
 
 ### PHP
-Payline SDK works with SOAP webservices and as such requires [PHP SOAP extension](http://php.net/soap).
+* PHP 5.4+ / 7.0+
+* [PHP SOAP extension](http://php.net/soap) for Payline SDK
+
+### Symfony
+Symfony 2.7.10+ / 3.0.3+
 
 
 ## Installation
