@@ -2,6 +2,8 @@
 
 Integrates [Payline payment solution](http://www.payline.com/) with Symfony.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/4d54fe75-e1ee-4c67-94b6-7db9bbbda418/big.png)](https://insight.sensiolabs.com/projects/4d54fe75-e1ee-4c67-94b6-7db9bbbda418)
+
 
 ## Features
 
