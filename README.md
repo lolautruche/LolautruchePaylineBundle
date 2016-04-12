@@ -66,4 +66,4 @@ LolautruchePaylineBundle:
 
 ## Documentation
 
-See [Resources/doc/](Resources/doc/00-index.md).
+See [Resources/doc/](Resources/doc/00-index.md)
