@@ -18,5 +18,8 @@
         "psr-4" : {
             "Lolautruche\\PaylineBundle\\" : ""
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.3"
     }
 }
