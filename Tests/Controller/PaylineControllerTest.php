@@ -39,8 +39,8 @@ class PaylineControllerTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->eventDispatcher = $this->getMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $this->paylineGateway = $this->getMock('\Lolautruche\PaylineBundle\Payline\WebGatewayInterface');
+        $this->eventDispatcher = $this->createMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $this->paylineGateway = $this->createMock('\Lolautruche\PaylineBundle\Payline\WebGatewayInterface');
     }
 
     public function testPaymentNotificationAction()

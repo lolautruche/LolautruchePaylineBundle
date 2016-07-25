@@ -38,10 +38,8 @@ class PaylineTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->sdk = $this->getMockBuilder('\Payline\PaylineSDK')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->eventDispatcher = $this->getMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $this->sdk = $this->createMock('\Payline\PaylineSDK');
+        $this->eventDispatcher = $this->createMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
     }
 
     public function testGetPaylineSdk()
