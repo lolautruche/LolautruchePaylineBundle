@@ -224,13 +224,18 @@ class PaylineResultTest extends PHPUnit_Framework_TestCase
     {
         return [
             [
-                [['key' => 'foo', 'value' => 'bar']],
+                // With only one private data, ['privateDataList']['privateData'] is not an array of privateData but the data itself.
+                // @see https://github.com/lolautruche/LolautruchePaylineBundle/issues/1
+                ['key' => 'foo', 'value' => 'bar'],
                 'foo',
                 null,
                 'bar',
             ],
             [
-                [['key' => 'foo', 'value' => 'bar']],
+                [
+                    ['key' => 'foo', 'value' => 'bar'],
+                    ['key' => 'baz', 'value' => '123456'],
+                ],
                 'biz',
                 'default_value',
                 'default_value',

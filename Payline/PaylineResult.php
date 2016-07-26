@@ -63,6 +63,22 @@ class PaylineResult
         $this->shortMessage = $this->resultHash['result']['shortMessage'];
         $this->longMessage = $this->resultHash['result']['longMessage'];
         if (!empty($this->resultHash['privateDataList']['privateData'])) {
+            // With only one private data, ['privateDataList']['privateData'] is not an array but the data itself.
+            // Several private data:
+            // [
+            //     ['key' => 'foo', 'value' => 'bar'],
+            //     ['key' => 'baz', 'value' => '123456'],
+            // ]
+            // One private data:
+            // [
+            //     'key' => 'foo',
+            //     'value' => 'bar',
+            // ]
+            // @see https://github.com/lolautruche/LolautruchePaylineBundle/issues/1
+            if (isset($this->resultHash['privateDataList']['privateData']['key'])) {
+                $this->resultHash['privateDataList']['privateData'] = [$this->resultHash['privateDataList']['privateData']];
+            }
+
             foreach ($this->resultHash['privateDataList']['privateData'] as $data) {
                 $this->privateData[$data['key']] = $data['value'];
             }
