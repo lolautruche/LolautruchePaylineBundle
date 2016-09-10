@@ -156,4 +156,30 @@ class Payline implements WebGatewayInterface
 
         return $paylineResult;
     }
+    
+    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0) {
+
+        // first, we get the payment details
+        $paymentDetails = $this->paylineSDK->getWebPaymentDetails(['token' => $paymentToken]);
+
+        // add the private datas
+        foreach ($paymentDetails['privateDataList']['privateData'] as $key => $value) {
+            $this->paylineSDK->addPrivateData(['key' => $value['key'], 'value' => $value['value']]);
+        }
+
+        // refund action is 421
+        $paymentDetails['payment']['action'] = '421';
+
+        $params = array(
+            'transactionID' => $paymentDetails['transaction']['id'],
+            'payment' => $paymentDetails['payment'],
+            'comment' => $comment,
+            'sequenceNumber' => $sequenceNumber
+        );
+
+        // do refund
+        $paylineResult = new PaylineResult($this->paylineSDK->doRefund($params));
+
+        return $paylineResult;
+    }
 }
