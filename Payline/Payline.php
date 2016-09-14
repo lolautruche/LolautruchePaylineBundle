@@ -157,8 +157,8 @@ class Payline implements WebGatewayInterface
         return $paylineResult;
     }
     
-    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0) {
-
+    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0)
+    {
         // first, we get the payment details
         $paymentDetails = $this->paylineSDK->getWebPaymentDetails(['token' => $paymentToken]);
 
@@ -167,15 +167,14 @@ class Payline implements WebGatewayInterface
             $this->paylineSDK->addPrivateData(['key' => $value['key'], 'value' => $value['value']]);
         }
 
-        // refund action is 421
-        $paymentDetails['payment']['action'] = '421';
+        $paymentDetails['payment']['action'] = WebGatewayInterface::CODE_ACTION_DOREFUND;
 
-        $params = array(
+        $params = [
             'transactionID' => $paymentDetails['transaction']['id'],
             'payment' => $paymentDetails['payment'],
             'comment' => $comment,
             'sequenceNumber' => $sequenceNumber
-        );
+        ];
 
         // do refund
         $paylineResult = new PaylineResult($this->paylineSDK->doRefund($params));
