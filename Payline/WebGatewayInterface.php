@@ -37,4 +37,15 @@ interface WebGatewayInterface
      * @return PaylineResult
      */
     public function verifyWebTransaction($paymentToken);
+    
+    /**
+     * Process a refund by calling first "getWebPaymentDetails"
+     * Then "doRefund"
+     *
+     * @param $paymentToken
+     * @param string $comment
+     * @param int $sequenceNumber
+     * @return PaylineResult
+     */
+    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0);
 }
