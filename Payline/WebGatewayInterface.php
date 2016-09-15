@@ -16,6 +16,8 @@ namespace Lolautruche\PaylineBundle\Payline;
  */
 interface WebGatewayInterface
 {
+    const CODE_ACTION_DOREFUND = '421';
+    
     /**
      * Initiates the transaction on Payline servers.
      * Will trigger a "doWebPayment" SOAP call.
