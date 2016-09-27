@@ -247,4 +247,86 @@ class PaylineTest extends PHPUnit_Framework_TestCase
 
         self::assertEquals($result, $payline->verifyWebTransaction($token));
     }
+    
+    public function testDoRefund()
+    {
+        $differedActionDate = new DateTime();
+        $transactionId = '123456789';
+        $token = md5(microtime(true));
+        $defaultCurrency = WebTransaction::CURRENCY_EUR;
+        $returnUrl = 'return';
+        $cancelUrl = 'cancel';
+        $notificationUrl = 'notification';
+        $payline = new Payline(
+            $this->sdk,
+            $this->eventDispatcher,
+            $defaultCurrency,
+            $returnUrl,
+            $cancelUrl,
+            $notificationUrl
+        );
+
+        $returnHash = [
+            'result' => [
+                'code' => PaylineResult::CODE_TRANSACTION_APPROVED,
+                'shortMessage' => 'foo',
+                'longMessage' => 'bar',
+            ],
+            'transaction' => [
+                'id' => $transactionId
+            ],
+            'payment' => [
+                'amount' => '10.00',
+                'currency' => '978',
+                'mode' => 'CPT',
+                'contractNumber' => '123456',
+                'differedActionDate' => $differedActionDate,
+                'method' => 'CB'
+            ],
+            'privateDataList' => [
+                'privateData' => [
+                    [
+                        'key' => 'foo',
+                        'value' => 'bar'
+                    ],
+                    [
+                        'key' => 'foo',
+                        'value' => 'bar'
+                    ]
+                ]
+            ]
+        ];
+        $this->sdk
+            ->expects($this->once())
+            ->method('getWebPaymentDetails')
+            ->with(['token' => $token])
+            ->willReturn($returnHash);
+
+        $this->sdk
+            ->expects($this->any())
+            ->method('addPrivateData');
+
+        $this->sdk
+            ->expects($this->once())
+            ->method('doRefund')
+            ->with([
+                'transactionID' => $transactionId,
+                'payment' => [
+                    'amount' => '10.00',
+                    'currency' => '978',
+                    'action' => '421',
+                    'mode' => 'CPT',
+                    'contractNumber' => '123456',
+                    'differedActionDate' => $differedActionDate,
+                    'method' => 'CB'
+                ],
+                'comment' => '',
+                'sequenceNumber' => 0
+            ])
+            ->willReturn($returnHash);
+
+        $result = new PaylineResult($returnHash);
+
+        self::assertEquals($result, $payline->doRefund($token));
+    }
 }
