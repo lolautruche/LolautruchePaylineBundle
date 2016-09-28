@@ -107,7 +107,7 @@ class PaylineResultTest extends PHPUnit_Framework_TestCase
             'transaction' => [
                 'id' => '26272160000636',
                 'date' => '28/09/2016 16:00',
-                'isDuplicated' => '1',
+                'isDuplicated' => '0',
                 'isPossibleFraud' => '0'
             ],
         ]);
