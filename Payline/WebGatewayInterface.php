@@ -16,6 +16,8 @@ namespace Lolautruche\PaylineBundle\Payline;
  */
 interface WebGatewayInterface
 {
+    const CODE_ACTION_DOREFUND = '421';
+    
     /**
      * Initiates the transaction on Payline servers.
      * Will trigger a "doWebPayment" SOAP call.
@@ -37,4 +39,15 @@ interface WebGatewayInterface
      * @return PaylineResult
      */
     public function verifyWebTransaction($paymentToken);
+    
+    /**
+     * Process a refund by calling first "getWebPaymentDetails"
+     * Then "doRefund"
+     *
+     * @param $paymentToken
+     * @param string $comment
+     * @param int $sequenceNumber
+     * @return PaylineResult
+     */
+    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0);
 }
