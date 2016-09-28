@@ -90,6 +90,12 @@ class PaylineResultTest extends PHPUnit_Framework_TestCase
                 'shortMessage' => $shortMessage,
                 'longMessage' => $longMessage,
             ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '1',
+                'isPossibleFraud' => '0'
+            ]
         ]);
         self::assertTrue($result->isDuplicate());
         self::assertSame($shortMessage, $result->getShortMessage());
@@ -109,7 +115,7 @@ class PaylineResultTest extends PHPUnit_Framework_TestCase
                 'date' => '28/09/2016 16:00',
                 'isDuplicated' => '0',
                 'isPossibleFraud' => '0'
-            ],
+            ]
         ]);
         self::assertFalse($result->isDuplicate());
         self::assertSame($shortMessage, $result->getShortMessage());
