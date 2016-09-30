@@ -90,7 +90,32 @@ class PaylineResultTest extends PHPUnit_Framework_TestCase
                 'shortMessage' => $shortMessage,
                 'longMessage' => $longMessage,
             ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '0',
+                'isPossibleFraud' => '0'
+            ]
         ]);
+
+        self::assertTrue($result->isDuplicate());
+        self::assertSame($shortMessage, $result->getShortMessage());
+        self::assertSame($longMessage, $result->getLongMessage());
+
+        $result = new PaylineResult([
+            'result' => [
+                'code' => PaylineResult::CODE_TRANSACTION_APPROVED,
+                'shortMessage' => $shortMessage,
+                'longMessage' => $longMessage,
+            ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '1',
+                'isPossibleFraud' => '0'
+            ]
+        ]);
+
         self::assertTrue($result->isDuplicate());
         self::assertSame($shortMessage, $result->getShortMessage());
         self::assertSame($longMessage, $result->getLongMessage());
@@ -104,6 +129,12 @@ class PaylineResultTest extends PHPUnit_Framework_TestCase
                 'shortMessage' => $shortMessage,
                 'longMessage' => $longMessage,
             ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '0',
+                'isPossibleFraud' => '0'
+            ]
         ]);
         self::assertFalse($result->isDuplicate());
         self::assertSame($shortMessage, $result->getShortMessage());

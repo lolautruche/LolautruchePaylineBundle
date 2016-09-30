@@ -49,5 +49,5 @@ interface WebGatewayInterface
      * @param int $sequenceNumber
      * @return PaylineResult
      */
-    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0);
+    public function doRefund($paymentToken, $comment = '', $sequenceNumber = 0, $amount = null);
 }

@@ -95,6 +95,28 @@ class PaymentNotificationEventTest extends PHPUnit_Framework_TestCase
                 'shortMessage' => 'foo',
                 'longMessage' => 'bar',
             ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '0',
+                'isPossibleFraud' => '0'
+            ]
+        ]);
+        $event = new PaymentNotificationEvent($result);
+        self::assertTrue($event->isPaymentDuplicate());
+
+        $result = new PaylineResult([
+            'result' => [
+                'code' => PaylineResult::CODE_TRANSACTION_APPROVED,
+                'shortMessage' => 'foo',
+                'longMessage' => 'bar',
+            ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '1',
+                'isPossibleFraud' => '0'
+            ]
         ]);
         $event = new PaymentNotificationEvent($result);
         self::assertTrue($event->isPaymentDuplicate());
@@ -106,6 +128,12 @@ class PaymentNotificationEventTest extends PHPUnit_Framework_TestCase
                 'shortMessage' => 'foo',
                 'longMessage' => 'bar',
             ],
+            'transaction' => [
+                'id' => '26272160000636',
+                'date' => '28/09/2016 16:00',
+                'isDuplicated' => '0',
+                'isPossibleFraud' => '0'
+            ]
         ]);
         $event = new PaymentNotificationEvent($result);
         self::assertFalse($event->isPaymentDuplicate());

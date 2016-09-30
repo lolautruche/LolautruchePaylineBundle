@@ -107,7 +107,7 @@ class PaylineResult
      */
     public function isDuplicate()
     {
-        return $this->code === static::CODE_TRANSACTION_DUPLICATE;
+        return $this->code === static::CODE_TRANSACTION_DUPLICATE || (isset($this->resultHash['transaction']['isDuplicated']) && $this->resultHash['transaction']['isDuplicated']);
     }
 
     /**
