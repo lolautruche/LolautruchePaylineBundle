@@ -4,9 +4,9 @@
 
 ```yaml
 lolautruche_payline:
-    merchant_id:          ~ # Required
-    access_key:           ~ # Required
-    contract_number:      ~ # Required
+    merchant_id:          ~ # Required. Must be surrounded by quotes as this is a string.
+    access_key:           ~ # Required. Must be surrounded by quotes as this is a string.
+    contract_number:      ~ # Required. Must be surrounded by quotes as this is a string.
     default_currency:     ~ # One of "EUR"; "DOLLAR"; "CHF"; "POUND"; "CAD", Required
     default_confirmation_route:  ~ # Required
     default_error_route:  ~ # Required
@@ -24,8 +24,12 @@ lolautruche_payline:
 ### `merchant_id`
 Your Payline merchant ID
 
+> **MUST** be surrounded by quotes as this must be a string
+
 ### `access_key`
 The access key you generated in Payline admin
+
+> **MUST** be surrounded by quotes as this must be a string
 
 ### `contract_number`
 The default contract number to use.
