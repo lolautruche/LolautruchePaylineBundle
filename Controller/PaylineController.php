@@ -47,6 +47,13 @@ class PaylineController
      */
     private $defaultErrorUrl;
 
+    /**
+     * PaylineController constructor.
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param WebGatewayInterface      $payline
+     * @param string                   $defaultConfirmationUrl
+     * @param string                   $defaultErrorUrl
+     */
     public function __construct(EventDispatcherInterface $eventDispatcher, WebGatewayInterface $payline, $defaultConfirmationUrl, $defaultErrorUrl)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -55,18 +62,26 @@ class PaylineController
         $this->defaultErrorUrl = $defaultErrorUrl;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function paymentNotificationAction(Request $request)
     {
-        $result = $this->payline->verifyWebTransaction($request->get('token'));
+        $result = $this->payline->verifyWebTransaction($request->get('paylinetoken'));
         $event = new PaymentNotificationEvent($result);
         $this->eventDispatcher->dispatch(PaylineEvents::ON_NOTIFICATION, $event);
 
         return new Response('OK');
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function backToShopAction(Request $request)
     {
-        $result = $this->payline->verifyWebTransaction($request->get('token'));
+        $result = $this->payline->verifyWebTransaction($request->get('paylinetoken'));
         $event = new PaymentNotificationEvent($result);
         $this->eventDispatcher->dispatch(PaylineEvents::ON_BACK_TO_SHOP, $event);
 
