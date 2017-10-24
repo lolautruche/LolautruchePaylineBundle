@@ -47,7 +47,7 @@ class PaylineControllerTest extends PHPUnit_Framework_TestCase
     {
         $token = md5(microtime(true));
         $request = new Request();
-        $request->query->set('token', $token);
+        $request->query->set('paylinetoken', $token);
         $result = new PaylineResult([]);
         $this->paylineGateway
             ->expects($this->once())
@@ -68,7 +68,7 @@ class PaylineControllerTest extends PHPUnit_Framework_TestCase
     {
         $token = md5(microtime(true));
         $request = new Request();
-        $request->query->set('token', $token);
+        $request->query->set('paylinetoken', $token);
         $result = new PaylineResult([
             'result' => [
                 'code' => PaylineResult::CODE_TRANSACTION_APPROVED,
@@ -97,7 +97,7 @@ class PaylineControllerTest extends PHPUnit_Framework_TestCase
     {
         $token = md5(microtime(true));
         $request = new Request();
-        $request->query->set('token', $token);
+        $request->query->set('paylinetoken', $token);
         $result = new PaylineResult([
             'result' => [
                 'code' => PaylineResult::CODE_INTERNAL_ERROR,
@@ -126,7 +126,7 @@ class PaylineControllerTest extends PHPUnit_Framework_TestCase
     {
         $token = md5(microtime(true));
         $request = new Request();
-        $request->query->set('token', $token);
+        $request->query->set('paylinetoken', $token);
         $result = new PaylineResult([
             'result' => [
                 'code' => PaylineResult::CODE_TRANSACTION_APPROVED,
