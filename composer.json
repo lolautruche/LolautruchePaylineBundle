@@ -10,12 +10,12 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|>=7.0.8",
+        "php": "^7.2.5",
         "ext-soap": "*",
         "monext/payline-sdk": "^4.59",
-        "symfony/framework-bundle": "^3.4|^4.0",
-        "symfony/expression-language": "^3.4|^4.0",
-        "symfony/property-access": "^3.4|^4.0"
+        "symfony/framework-bundle": "^4.4|5.0",
+        "symfony/expression-language": "^4.4|^5.0",
+        "symfony/property-access": "^4.4|^5.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -23,8 +23,8 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5",
-        "matthiasnoback/symfony-config-test": "^3.1.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^2.3.1"
+        "phpunit/phpunit": "^8.4",
+        "matthiasnoback/symfony-config-test": "^4.0.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0"
     }
 }
