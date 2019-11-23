@@ -37,7 +37,7 @@ class PaylineTest extends TestCase
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->sdk = $this->createMock(PaylineSDK::class);
