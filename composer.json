@@ -2,6 +2,7 @@
     "name": "lolautruche/payline-bundle",
     "description": "Symfony integration for Payline payment system",
     "license": "MIT",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Jérôme Vieilledent",
@@ -9,10 +10,12 @@
         }
     ],
     "require": {
-        "php": "~5.4|~7.0",
+        "php": "^5.5.9|>=7.0.8",
         "ext-soap": "*",
-        "monext/payline-sdk": "^4.45",
-        "symfony/symfony": "^2.7.10|^3.0.3|^4.0"
+        "monext/payline-sdk": "^4.59",
+        "symfony/framework-bundle": "^3.4|^4.0",
+        "symfony/expression-language": "^3.4|^4.0",
+        "symfony/property-access": "^3.4|^4.0"
     },
     "autoload" : {
         "psr-4" : {
@@ -20,8 +23,8 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.3",
-        "matthiasnoback/symfony-config-test": "^1.4",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6"
+        "phpunit/phpunit": "^6.5",
+        "matthiasnoback/symfony-config-test": "^3.1.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^2.3.1"
     }
 }

@@ -13,9 +13,9 @@ namespace Lolautruche\PaylineBundle\Tests\Payline;
 
 use DateTime;
 use Lolautruche\PaylineBundle\Payline\WebTransaction;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class WebTransactionTest extends PHPUnit_Framework_TestCase
+class WebTransactionTest extends TestCase
 {
     public function testConstructor()
     {

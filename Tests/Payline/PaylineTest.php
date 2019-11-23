@@ -18,9 +18,11 @@ use Lolautruche\PaylineBundle\Event\WebTransactionEvent;
 use Lolautruche\PaylineBundle\Payline\Payline;
 use Lolautruche\PaylineBundle\Payline\PaylineResult;
 use Lolautruche\PaylineBundle\Payline\WebTransaction;
-use PHPUnit_Framework_TestCase;
+use Payline\PaylineSDK;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class PaylineTest extends PHPUnit_Framework_TestCase
+class PaylineTest extends TestCase
 {
     /**
      * @var \Payline\PaylineSDK|\PHPUnit_Framework_MockObject_MockObject
@@ -38,8 +40,8 @@ class PaylineTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->sdk = $this->createMock('\Payline\PaylineSDK');
-        $this->eventDispatcher = $this->createMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $this->sdk = $this->createMock(PaylineSDK::class);
+        $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
     }
 
     public function testGetPaylineSdk()

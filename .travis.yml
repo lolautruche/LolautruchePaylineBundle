@@ -7,8 +7,9 @@ cache:
     - $HOME/.composer/cache
 
 php:
-  - 5.6
-  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
 
 branches:
   only:
@@ -17,12 +18,14 @@ branches:
 
 matrix:
   include:
-    - php: 5.6
-      env: SYMFONY_VERSION='~2.7.10'
-    - php: 5.6
-      env: SYMFONY_VERSION='^2.8'
-    - php: 7.0
-      env: SYMFONY_VERSION='^2.8'
+    - php: 7.1
+      env: SYMFONY_VERSION='^3.4'
+    - php: 7.1
+      env: SYMFONY_VERSION='^4.0'
+    - php: 7.2
+      env: SYMFONY_VERSION='^4.0'
+    -   php: 7.3
+        env: SYMFONY_VERSION='^4.0'
 
 before_install:
   - sh -c 'if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev --no-update symfony/symfony=$SYMFONY_VERSION; fi;'
@@ -31,4 +34,4 @@ before_script:
   - composer update
 
 script:
-  - phpunit
+  - vendor/bin/phpunit

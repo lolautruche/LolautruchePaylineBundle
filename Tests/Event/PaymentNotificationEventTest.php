@@ -13,10 +13,10 @@ namespace Lolautruche\PaylineBundle\Tests\Event;
 
 use Lolautruche\PaylineBundle\Event\PaymentNotificationEvent;
 use Lolautruche\PaylineBundle\Payline\PaylineResult;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaymentNotificationEventTest extends PHPUnit_Framework_TestCase
+class PaymentNotificationEventTest extends TestCase
 {
     public function testConstruct()
     {
