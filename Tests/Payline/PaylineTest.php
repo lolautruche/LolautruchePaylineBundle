@@ -75,7 +75,7 @@ class PaylineTest extends TestCase
         $this->eventDispatcher
             ->expects($this->at(0))
             ->method('dispatch')
-            ->with(PaylineEvents::PRE_WEB_TRANSACTION_INITIATE, $this->equalTo(new WebTransactionEvent($transaction)));
+            ->with($this->equalTo(new WebTransactionEvent($transaction)), PaylineEvents::PRE_WEB_TRANSACTION_INITIATE);
 
         $returnHash = [
             'result' => [
@@ -111,7 +111,7 @@ class PaylineTest extends TestCase
         $this->eventDispatcher
             ->expects($this->at(1))
             ->method('dispatch')
-            ->with(PaylineEvents::POST_WEB_TRANSACTION_INITIATE, $this->equalTo(new ResultEvent($result)));
+            ->with($this->equalTo(new ResultEvent($result)), PaylineEvents::POST_WEB_TRANSACTION_INITIATE);
 
         self::assertEquals($result, $payline->initiateWebTransaction($transaction));
     }
@@ -160,7 +160,7 @@ class PaylineTest extends TestCase
         $this->eventDispatcher
             ->expects($this->at(0))
             ->method('dispatch')
-            ->with(PaylineEvents::PRE_WEB_TRANSACTION_INITIATE, $this->equalTo(new WebTransactionEvent($transaction)));
+            ->with($this->equalTo(new WebTransactionEvent($transaction)), PaylineEvents::PRE_WEB_TRANSACTION_INITIATE);
 
         $this->sdk
             ->expects($this->at(0))
@@ -208,7 +208,7 @@ class PaylineTest extends TestCase
         $this->eventDispatcher
             ->expects($this->at(1))
             ->method('dispatch')
-            ->with(PaylineEvents::POST_WEB_TRANSACTION_INITIATE, $this->equalTo(new ResultEvent($result)));
+            ->with($this->equalTo(new ResultEvent($result)), PaylineEvents::POST_WEB_TRANSACTION_INITIATE);
 
         self::assertEquals($result, $payline->initiateWebTransaction($transaction));
     }
@@ -245,7 +245,7 @@ class PaylineTest extends TestCase
         $this->eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->with(PaylineEvents::WEB_TRANSACTION_VERIFY, $this->equalTo(new ResultEvent($result)));
+            ->with($this->equalTo(new ResultEvent($result)), PaylineEvents::WEB_TRANSACTION_VERIFY);
 
         self::assertEquals($result, $payline->verifyWebTransaction($token));
     }
