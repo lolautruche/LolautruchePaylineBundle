@@ -13,9 +13,9 @@ namespace Lolautruche\PaylineBundle\Tests\Event;
 
 use Lolautruche\PaylineBundle\Event\ResultEvent;
 use Lolautruche\PaylineBundle\Payline\PaylineResult;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ResultEventTest extends PHPUnit_Framework_TestCase
+class ResultEventTest extends TestCase
 {
     public function testConstruct()
     {

@@ -12,9 +12,9 @@
 namespace Lolautruche\PaylineBundle\Tests\Payline;
 
 use Lolautruche\PaylineBundle\Payline\PaylineResult;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class PaylineResultTest extends PHPUnit_Framework_TestCase
+class PaylineResultTest extends TestCase
 {
     public function testGetResultHash()
     {

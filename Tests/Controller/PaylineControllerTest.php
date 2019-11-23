@@ -15,13 +15,15 @@ use Lolautruche\PaylineBundle\Controller\PaylineController;
 use Lolautruche\PaylineBundle\Event\PaylineEvents;
 use Lolautruche\PaylineBundle\Event\PaymentNotificationEvent;
 use Lolautruche\PaylineBundle\Payline\PaylineResult;
-use PHPUnit_Framework_TestCase;
+use Lolautruche\PaylineBundle\Payline\WebGatewayInterface;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaylineControllerTest extends PHPUnit_Framework_TestCase
+class PaylineControllerTest extends TestCase
 {
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface|\PHPUnit_Framework_MockObject_MockObject
@@ -39,8 +41,8 @@ class PaylineControllerTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->eventDispatcher = $this->createMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $this->paylineGateway = $this->createMock('\Lolautruche\PaylineBundle\Payline\WebGatewayInterface');
+        $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $this->paylineGateway = $this->createMock(WebGatewayInterface::class);
     }
 
     public function testPaymentNotificationAction()
