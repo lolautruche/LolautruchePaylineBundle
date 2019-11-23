@@ -48,7 +48,10 @@ services:
     Lolautruche\PaylineBundle\Payline\WebGatewayInterface: '@Lolautruche\PaylineBundle\Payline\Payline'
 
     Lolautruche\PaylineBundle\Controller\PaylineController:
-        $defaultConfirmationUrl: "@=service('router').generate(parameter('lolautruche_payline.default_confirmation_route'), [], 0)"
-        $defaultErrorUrl: "@=service('router').generate(parameter('lolautruche_payline.default_error_route'), [], 0)"
+        arguments:
+            $defaultConfirmationUrl: "@=service('router').generate(parameter('lolautruche_payline.default_confirmation_route'), [], 0)"
+            $defaultErrorUrl: "@=service('router').generate(parameter('lolautruche_payline.default_error_route'), [], 0)"
+        tags:
+            - { name: controller.service_arguments }
 
     lolautruche_payline.controller: '@Lolautruche\PaylineBundle\Controller\PaylineController'
