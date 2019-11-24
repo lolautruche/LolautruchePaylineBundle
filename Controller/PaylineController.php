@@ -69,8 +69,7 @@ class PaylineController
     public function paymentNotificationAction(Request $request)
     {
         $result = $this->payline->verifyWebTransaction($request->get('paylinetoken', $request->get('token')));
-        $event = new PaymentNotificationEvent($result);
-        $this->eventDispatcher->dispatch(PaylineEvents::ON_NOTIFICATION, $event);
+        $this->eventDispatcher->dispatch(new PaymentNotificationEvent($result), PaylineEvents::ON_NOTIFICATION);
 
         return new Response('OK');
     }
@@ -83,7 +82,7 @@ class PaylineController
     {
         $result = $this->payline->verifyWebTransaction($request->get('paylinetoken', $request->get('token')));
         $event = new PaymentNotificationEvent($result);
-        $this->eventDispatcher->dispatch(PaylineEvents::ON_BACK_TO_SHOP, $event);
+        $this->eventDispatcher->dispatch($event, PaylineEvents::ON_BACK_TO_SHOP);
 
         if ($event->hasResponse()) {
             return $event->getResponse();

@@ -60,7 +60,7 @@ class PaylineControllerTest extends TestCase
         $this->eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->with(PaylineEvents::ON_NOTIFICATION, new PaymentNotificationEvent($result));
+            ->with(new PaymentNotificationEvent($result), PaylineEvents::ON_NOTIFICATION);
 
         $controller = new PaylineController($this->eventDispatcher, $this->paylineGateway, 'confirmation', 'error');
         self::assertEquals(new Response('OK'), $controller->paymentNotificationAction($request));
@@ -87,7 +87,7 @@ class PaylineControllerTest extends TestCase
         $this->eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->with(PaylineEvents::ON_BACK_TO_SHOP, new PaymentNotificationEvent($result));
+            ->with(new PaymentNotificationEvent($result), PaylineEvents::ON_BACK_TO_SHOP);
 
         $defaultConfirmationUrl = 'confirmation';
         $defaultErrorUrl = 'error';
@@ -116,7 +116,7 @@ class PaylineControllerTest extends TestCase
         $this->eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->with(PaylineEvents::ON_BACK_TO_SHOP, new PaymentNotificationEvent($result));
+            ->with(new PaymentNotificationEvent($result), PaylineEvents::ON_BACK_TO_SHOP);
 
         $defaultConfirmationUrl = 'confirmation';
         $defaultErrorUrl = 'error';
