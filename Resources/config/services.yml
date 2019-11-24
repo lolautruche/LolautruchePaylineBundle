@@ -54,4 +54,6 @@ services:
         tags:
             - { name: controller.service_arguments }
 
-    lolautruche_payline.controller: '@Lolautruche\PaylineBundle\Controller\PaylineController'
+    lolautruche_payline.controller:
+        alias: Lolautruche\PaylineBundle\Controller\PaylineController
+        public: true
