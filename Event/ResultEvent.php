@@ -12,7 +12,7 @@
 namespace Lolautruche\PaylineBundle\Event;
 
 use Lolautruche\PaylineBundle\Payline\PaylineResult;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ResultEvent extends Event
 {

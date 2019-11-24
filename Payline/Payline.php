@@ -93,8 +93,8 @@ class Payline implements WebGatewayInterface
     public function initiateWebTransaction(WebTransaction $transaction)
     {
         $this->eventDispatcher->dispatch(
-            PaylineEvents::PRE_WEB_TRANSACTION_INITIATE,
-            new WebTransactionEvent($transaction)
+            new WebTransactionEvent($transaction),
+            PaylineEvents::PRE_WEB_TRANSACTION_INITIATE
         );
 
         $payment = [
@@ -134,8 +134,8 @@ class Payline implements WebGatewayInterface
 
         $paylineResult = new PaylineResult($this->paylineSDK->doWebPayment($params));
         $this->eventDispatcher->dispatch(
-            PaylineEvents::POST_WEB_TRANSACTION_INITIATE,
-            new ResultEvent($paylineResult)
+            new ResultEvent($paylineResult),
+            PaylineEvents::POST_WEB_TRANSACTION_INITIATE
         );
 
         return $paylineResult;
@@ -150,8 +150,8 @@ class Payline implements WebGatewayInterface
 
         $paylineResult = new PaylineResult($response);
         $this->eventDispatcher->dispatch(
-            PaylineEvents::WEB_TRANSACTION_VERIFY,
-            new ResultEvent($paylineResult)
+            new ResultEvent($paylineResult),
+            PaylineEvents::WEB_TRANSACTION_VERIFY
         );
 
         return $paylineResult;
