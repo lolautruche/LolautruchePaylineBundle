@@ -19,8 +19,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('lolautruche_payline');
+        $treeBuilder = new TreeBuilder('lolautruche_payline');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
