@@ -63,18 +63,12 @@ class Configuration implements ConfigurationInterface
                     ->info('Default route name to use for error page (e.g. payment refused)')
                     ->example(['default_error_route' => 'my_error_route'])
                 ->end()
-                ->enumNode('environment')
+                ->scalarNode('environment')
                     ->isRequired()
-                    ->values([
-                        PaylineSDK::ENV_HOMO,
-                        PaylineSDK::ENV_PROD,
-                        PaylineSDK::ENV_INT,
-                        PaylineSDK::ENV_DEV,
-                    ])
                     ->beforeNormalization()
                         ->always(function ($v) { return strtoupper($v); })
                     ->end()
-                    ->info("The payment environment\ne.g. 'homo' for 'Homologation', 'prod' for 'Production'")
+                    ->info("The payment environment\ne.g. 'homo' for 'Homologation', 'prod' for 'Production'.\nValid values are HOMO, PROD, INT and DEV.")
                     ->defaultValue('HOMO')
                 ->end()
                 ->enumNode('log_level')
