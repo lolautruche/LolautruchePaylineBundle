@@ -12,6 +12,7 @@ lolautruche_payline:
     default_error_route:  ~ # Required
     environment:          HOMO # One of "HOMO"; "PROD"; "INT"; "DEV", Required
     log_level:            warning # One of "debug"; "info"; "notice"; "warning"; "error"; "critical"; "alert"; "emergency"
+    # Proxy to use for calling Payline SOAP API.
     proxy:
         host:                 null
         port:                 null
@@ -20,6 +21,13 @@ lolautruche_payline:
 ```
 
 ## Configuration details
+
+> **Note about sensitive settings:**
+> You may want to encrypt sensitive settings such as `merchant_id`, `access_key` or `contract_number`.
+>
+> To do so, use `bin/console secrets:set` command.
+>
+> Read more about [Encrypted Secrets Management](https://symfony.com/blog/new-in-symfony-4-4-encrypted-secrets-management).
 
 ### `merchant_id`
 Your Payline merchant ID
