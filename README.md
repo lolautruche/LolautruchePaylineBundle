@@ -25,44 +25,29 @@ Mandatory elements from you Payline account are:
 * **Contract number**, related to the means of payment you configured in Payline admin
 
 ### PHP
-* PHP 5.4+ / 7.0+
+* PHP 5.5.9+ / 7.0.8+
 * [PHP SOAP extension](http://php.net/soap) for Payline SDK
 
 ### Symfony
-Symfony 2.7.10+ / 3.0.3+
+Symfony 3.4 / 4.x, with Symfony Flex support
+
+
+> For support of earlier versions of Symfony, refer to:
+> - [1.1](https://github.com/lolautruche/LolautruchePaylineBundle/tree/1.1) (Symfony 2.7 / 3.x)
 
 
 ## Installation
 
-This bundle is available on [Packagist](https://packagist.org/packages/lolautruche/payline-bundle).
-You can install it using Composer.
+This bundle is installable with [Symfony Flex](https://flex.symfony.com).
+You first need to allow contrib recipes before requiring the package:
 
 ```
-composer require lolautruche/payline-bundle
+composer config extra.symfony.allow-contrib true
+composer req lolautruche/payline-bundle
 ```
 
-Then add it to your application:
-
-```php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = [
-        // ...
-        new Lolautruche\PaylineBundle\LolautruchePaylineBundle,
-        // ...
-    ];
-}
-```
-
-Add the routes to your `routing.yml`:
-
-```yaml
-LolautruchePaylineBundle:
-    resource: "@LolautruchePaylineBundle/Resources/config/routing.yml"
-    prefix:   /
-```
+Everything will be pre-configured for you; 
+however ensure to correctly expose the environment variables commented in `.env` file.
 
 
 ## Documentation
