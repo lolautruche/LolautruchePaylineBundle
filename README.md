@@ -14,7 +14,7 @@ Integrates [Payline payment solution](http://www.payline.com/) with Symfony.
 * Extensibility using events
 
 
-## Prerequisites
+## Requirements
 
 ### Payline account
 You will of course need a valid Payline account.
@@ -25,44 +25,30 @@ Mandatory elements from you Payline account are:
 * **Contract number**, related to the means of payment you configured in Payline admin
 
 ### PHP
-* PHP 5.4+ / 7.0+
+* PHP >=7.2.5
 * [PHP SOAP extension](http://php.net/soap) for Payline SDK
 
 ### Symfony
-Symfony 2.7.10+ / 3.0.3+
+Symfony 4.4 / 5.x
 
 
 ## Installation
 
-This bundle is available on [Packagist](https://packagist.org/packages/lolautruche/payline-bundle).
-You can install it using Composer.
+This bundle is installable with [Symfony Flex](https://flex.symfony.com).
+You first need to allow contrib recipes before requiring the package:
 
 ```
-composer require lolautruche/payline-bundle
+composer config extra.symfony.allow-contrib true
+composer req lolautruche/payline-bundle
 ```
 
-Then add it to your application:
+Everything will be pre-configured for you; however, ensure to **Encrypt sensitive environment variables**,
+e.g. `PAYLINE_MERCHANT_ID` and `PAYLINE_ACCESS_KEY` with [`secrets:set` command](https://symfony.com/blog/new-in-symfony-4-4-encrypted-secrets-management):
 
-```php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = [
-        // ...
-        new Lolautruche\PaylineBundle\LolautruchePaylineBundle,
-        // ...
-    ];
-}
-```
-
-Add the routes to your `routing.yml`:
-
-```yaml
-LolautruchePaylineBundle:
-    resource: "@LolautruchePaylineBundle/Resources/config/routing.yml"
-    prefix:   /
-```
+````bash
+php bin/console secrets:set PAYLINE_MERCHANT_ID
+php bin/console secrets:set PAYLINE_ACCESS_KEY
+````
 
 
 ## Documentation
