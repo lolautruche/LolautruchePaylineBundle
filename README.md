@@ -31,6 +31,10 @@ Mandatory elements from you Payline account are:
 ### Symfony
 Symfony 4.4 / 5.x
 
+> For support of earlier versions of Symfony, refer to:
+> - [2.0](https://github.com/lolautruche/LolautruchePaylineBundle/tree/2.0) (Symfony 3.4 / 4.x) with Symfony Flex support
+> - [1.1](https://github.com/lolautruche/LolautruchePaylineBundle/tree/1.1) (Symfony 2.7 / 3.x)
+
 
 ## Installation
 
