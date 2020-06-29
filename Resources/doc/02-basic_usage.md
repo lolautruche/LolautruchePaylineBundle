@@ -15,12 +15,13 @@ The user will then fill in his card number to pay on Payline website.
 ```php
 namespace Acme\TestBundle\Controller;
 
+use Lolautruche\PaylineBundle\Payline\Payline
 use Lolautruche\PaylineBundle\Payline\WebTransaction;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PaymentController extends Controller
 {
-    public function doPaymentAction($orderId)
+    public function doPaymentAction($orderId, Payline $payline)
     {
         // Create the transaction
         $transaction = new WebTransaction(
@@ -40,7 +41,6 @@ class PaymentController extends Controller
         ;
 
         // Initiate the transaction
-        $payline = $this->get('payline');
         /** @var \Lolautruche\PaylineBundle\Payline\PaylineResult $result */
         $result = $payline->initiateWebTransaction($transaction);
         if (!$result->isSuccessful()) {
