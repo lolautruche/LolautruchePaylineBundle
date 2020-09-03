@@ -13,7 +13,7 @@
         "php": "^7.2.5",
         "ext-soap": "*",
         "monext/payline-sdk": "^4.59",
-        "symfony/framework-bundle": "^4.4|5.0",
+        "symfony/framework-bundle": "^4.4|^5.0",
         "symfony/expression-language": "^4.4|^5.0",
         "symfony/property-access": "^4.4|^5.0"
     },
