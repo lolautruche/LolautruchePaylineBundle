@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.2.5|^8.0.2",
         "ext-soap": "*",
         "monext/payline-sdk": "^4.59",
         "symfony/framework-bundle": "^4.4|^5.0",
