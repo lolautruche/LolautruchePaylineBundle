@@ -9,6 +9,8 @@ cache:
 php:
   - 7.2
   - 7.3
+  - 7.4
+  - 8.0
 
 branches:
   only:
@@ -21,10 +23,19 @@ matrix:
       env: SYMFONY_VERSION='^4.4'
     - php: 7.3
       env: SYMFONY_VERSION='^4.4'
+    - php: 7.4
+      env: SYMFONY_VERSION='^4.4'
+    - php: 8.0
+      env: SYMFONY_VERSION='^4.4'
+
     - php: 7.2
       env: SYMFONY_VERSION='^5.0'
-    -   php: 7.3
-        env: SYMFONY_VERSION='^5.0'
+    - php: 7.3
+      env: SYMFONY_VERSION='^5.0'
+    - php: 7.4
+      env: SYMFONY_VERSION='^5.0'
+    - php: 8.0
+      env: SYMFONY_VERSION='^5.0'
 
 before_install:
   - sh -c 'if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev --no-update symfony/symfony=$SYMFONY_VERSION; fi;'

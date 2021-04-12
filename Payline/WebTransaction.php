@@ -11,7 +11,7 @@
 
 namespace Lolautruche\PaylineBundle\Payline;
 
-use DateTime;
+use DateTimeInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -110,7 +110,7 @@ class WebTransaction
     /**
      * The order date.
      *
-     * @var DateTime
+     * @var DateTimeInterface
      */
     private $orderDate;
 
@@ -161,7 +161,7 @@ class WebTransaction
      */
     private $privateData = [];
 
-    public function __construct($amount, $orderRef, DateTime $orderDate)
+    public function __construct($amount, $orderRef, DateTimeInterface $orderDate)
     {
         $this->amount = $amount;
         $this->orderRef = $orderRef;
@@ -370,7 +370,7 @@ class WebTransaction
     }
 
     /**
-     * @return DateTime
+     * @return DateTimeInterface
      */
     public function getOrderDate()
     {
@@ -378,11 +378,11 @@ class WebTransaction
     }
 
     /**
-     * @param DateTime $orderDate
+     * @param DateTimeInterface $orderDate
      *
      * @return WebTransaction
      */
-    public function setOrderDate(DateTime $orderDate)
+    public function setOrderDate(DateTimeInterface $orderDate)
     {
         $this->orderDate = $orderDate;
 
