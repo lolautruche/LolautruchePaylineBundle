@@ -27,6 +27,10 @@ matrix:
       env: SYMFONY_VERSION='^4.4'
     - php: 8.0
       env: SYMFONY_VERSION='^4.4'
+    - php: 8.1
+      env: SYMFONY_VERSION='^4.4'
+    - php: 8.2
+      env: SYMFONY_VERSION='^4.4'
 
     - php: 7.2
       env: SYMFONY_VERSION='^5.0'
@@ -36,6 +40,17 @@ matrix:
       env: SYMFONY_VERSION='^5.0'
     - php: 8.0
       env: SYMFONY_VERSION='^5.0'
+    - php: 8.1
+      env: SYMFONY_VERSION='^5.0'
+    - php: 8.2
+      env: SYMFONY_VERSION='^5.0'
+
+    - php: 8.0
+      env: SYMFONY_VERSION='^6.0'
+    - php: 8.1
+      env: SYMFONY_VERSION='^6.0'
+    - php: 8.2
+      env: SYMFONY_VERSION='^6.0'
 
 before_install:
   - sh -c 'if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev --no-update symfony/symfony=$SYMFONY_VERSION; fi;'
